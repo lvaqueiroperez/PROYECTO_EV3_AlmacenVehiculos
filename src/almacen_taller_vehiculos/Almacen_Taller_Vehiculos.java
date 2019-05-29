@@ -1,5 +1,5 @@
 package almacen_taller_vehiculos;
-
+//ir haciendo
 import BD.ConectaBD;
 import BD.CreaBD;
 import Menu.MenuCliente;
