@@ -5,6 +5,9 @@
  */
 package Menu;
 
+import BD.Consultas;
+import java.util.ArrayList;
+
 /**
  *
  * @author luis-
@@ -64,6 +67,11 @@ public class MenuClientes extends javax.swing.JFrame {
         cPartesC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "liquidoFrenos-5.75", "cinturores-4", "llantas-15", "neumaticos-17.5", "radios-23", "altavoces-30" }));
 
         bCarro.setText("AÑADIR AL CARRO");
+        bCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCarroActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("(Precio en euros)");
 
@@ -133,7 +141,7 @@ public class MenuClientes extends javax.swing.JFrame {
                     .addComponent(cCoches, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, Short.MAX_VALUE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(84, 84, 84))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
@@ -211,6 +219,39 @@ public class MenuClientes extends javax.swing.JFrame {
     private void tDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tDirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tDirActionPerformed
+
+    //COMPROBAR SI HACEN FALTA O NO
+    //TENER EN CUENTA QUE HAY PARTES Y COCHES
+    //Array y ArrayList donde se irán almacenando las compras:
+    ArrayList<String> carroListN = new ArrayList<>();
+    ArrayList<Integer> carroListU = new ArrayList<>();
+
+    //contador para navegar por el array
+    int cont = 0;
+
+    private void bCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCarroActionPerformed
+
+        String parte = (String) cPartesC.getSelectedItem();
+        int unidades = (Integer) cUnidades1.getSelectedItem();
+        //SI SE PUEDE, AÑADIMOS LA PARTE AL ARRAYLIST, SI NO, NO
+        //HACE UN IF
+
+        boolean validez = Consultas.comprobarParte(parte, unidades);
+
+        if (validez == true) {
+
+            Consultas obj = new Consultas();
+
+            obj.updateTablapCoches(parte, unidades);
+
+            //ACTUALIZAMOS LA BASE DE DATOS
+        } else {
+
+            //no hace nada en la bd
+        }
+
+
+    }//GEN-LAST:event_bCarroActionPerformed
 
     /**
      * @param args the command line arguments

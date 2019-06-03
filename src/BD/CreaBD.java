@@ -13,7 +13,7 @@ public class CreaBD {
 
     public static void createNewDatabase() {
 
-        String url = "jdbc:sqlite:C:\\Users\\luis-\\Desktop\\1º DAM\\Netbeans Projects\\Boletines_Progra\\EV3PROYECTO\\BD.db";
+        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTO/PROYECTOEV3/BD.db";
         try (Connection conn = DriverManager.getConnection(url)) {
 
             if (conn != null) {
