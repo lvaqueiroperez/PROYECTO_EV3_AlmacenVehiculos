@@ -7,7 +7,7 @@ public class CreaTabla {
 
     public static void tablaAdmins() {
 
-        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTO/PROYECTOEV3/BD.db";
+        String url = "jdbc:sqlite:C:\\Users\\luis-\\Desktop\\1º DAM\\Netbeans Projects\\SUBIR_Y_BORRAR\\BD.db";
 
         String sql = "CREATE TABLE IF NOT EXISTS admins (\n"
                 + "	dni text NOT NULL PRIMARY KEY,\n"
@@ -31,7 +31,7 @@ public class CreaTabla {
 
     public static void tablaClientes() {
 
-        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTO/PROYECTOEV3/BD.db";
+        String url = "jdbc:sqlite:C:\\Users\\luis-\\Desktop\\1º DAM\\Netbeans Projects\\SUBIR_Y_BORRAR\\BD.db";
 
         String sql = "CREATE TABLE IF NOT EXISTS clientes (\n"
                 + "	dni text NOT NULL PRIMARY KEY,\n"
@@ -54,7 +54,7 @@ public class CreaTabla {
 
     public static void tablaPartesCoches() {
 
-        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTO/PROYECTOEV3/BD.db";
+        String url = "jdbc:sqlite:C:\\Users\\luis-\\Desktop\\1º DAM\\Netbeans Projects\\SUBIR_Y_BORRAR\\BD.db";
 
         String sql = "CREATE TABLE IF NOT EXISTS  pCoches (\n"
                 + "	nombre text NOT NULL PRIMARY KEY,\n"
@@ -78,7 +78,7 @@ public class CreaTabla {
 
     public static void tablaCoches() {
 
-        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTO/PROYECTOEV3/BD.db";
+        String url = "jdbc:sqlite:C:\\Users\\luis-\\Desktop\\1º DAM\\Netbeans Projects\\SUBIR_Y_BORRAR\\BD.db";
 
         String sql = "CREATE TABLE IF NOT EXISTS coches (\n"
                 + "	matricula text NOT NULL PRIMARY KEY,\n"

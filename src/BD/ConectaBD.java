@@ -14,7 +14,7 @@ public class ConectaBD {
 
         try {
 
-            String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTO/PROYECTOEV3/BD.db";
+            String url = "jdbc:sqlite:C:\\Users\\luis-\\Desktop\\1º DAM\\Netbeans Projects\\SUBIR_Y_BORRAR\\BD.db";
             conn = DriverManager.getConnection(url);
 
             JOptionPane.showMessageDialog(null, "Conectado a la BD");
