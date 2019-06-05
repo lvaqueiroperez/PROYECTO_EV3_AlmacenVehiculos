@@ -7,7 +7,7 @@ public class InsertarDatosIniciales {
 
     private Connection connect() {
 
-        String url = "jdbc:sqlite:C:\\Users\\luis-\\Desktop\\1º DAM\\Netbeans Projects\\SUBIR_Y_BORRAR\\BD.db";
+        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTOEV3/BD.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -17,40 +17,22 @@ public class InsertarDatosIniciales {
         return conn;
     }
 
-    public void insertAdmins(String dni, String nombre, String passw) {
+    public void insertClientesF(String nombre, String direccion, String telf, int numP, Float precioT) {
 
-        String sql = "INSERT INTO admins (dni,nombre,passw) VALUES(?,?,?)";
-
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, dni);
-            pstmt.setString(2, nombre);
-            pstmt.setString(3, passw);
-
-            pstmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Datos insertados");
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "ERROR, asegúrate de que has insertado los datos correctamente");
-        }
-    }
-
-    public void insertClientes(String dni, String nombre) {
-
-        String sql = "INSERT INTO clientes (dni,nombre) VALUES(?,?)";
+        String sql = "INSERT INTO clientesF (nombre,direccion,telf,numProductos,precioT) VALUES(?,?,?,?,?)";
 
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, dni);
-            pstmt.setString(2, nombre);
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, direccion);
+            pstmt.setString(3, telf);
+            pstmt.setInt(4, numP);
+            pstmt.setFloat(5, precioT);
 
             pstmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Datos insertados");
+            JOptionPane.showMessageDialog(null, "Gracias por su compra");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

@@ -6,8 +6,10 @@
 package Menu;
 
 import BD.Consultas;
+import BD.InsertarDatosIniciales;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -37,14 +39,16 @@ public class MenuClientes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cPartesC = new javax.swing.JComboBox<>();
         bCarro = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         cUnidades1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        bcomprar = new javax.swing.JButton();
         tDir = new javax.swing.JTextField();
         tNum = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tNombre = new javax.swing.JTextField();
+        volver = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -54,6 +58,8 @@ public class MenuClientes extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        panel2.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel1.setText("CATÁLOGO");
 
@@ -66,8 +72,6 @@ public class MenuClientes extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("(Precio en euros)");
-
         cUnidades1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
         cUnidades1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,7 +81,12 @@ public class MenuClientes extends javax.swing.JFrame {
 
         jLabel3.setText("Unidades");
 
-        jButton1.setText("COMPRAR");
+        bcomprar.setText("COMPRAR");
+        bcomprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bcomprarActionPerformed(evt);
+            }
+        });
 
         tDir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +98,21 @@ public class MenuClientes extends javax.swing.JFrame {
 
         jLabel6.setText("Teléfono de contacto");
 
+        jLabel2.setText("Nombre");
+
+        tNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tNombreActionPerformed(evt);
+            }
+        });
+
+        volver.setText("VOLVER");
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
@@ -96,65 +120,73 @@ public class MenuClientes extends javax.swing.JFrame {
             .addGroup(panel2Layout.createSequentialGroup()
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(357, 357, 357)
-                        .addComponent(jLabel3))
-                    .addGroup(panel2Layout.createSequentialGroup()
                         .addGap(322, 322, 322)
-                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bCarro)
-                            .addComponent(cUnidades1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(343, 343, 343)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(342, 342, 342)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addGap(238, 238, 238)
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tNum, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tDir, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tDir, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(295, 295, 295)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(355, 355, 355)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(308, 308, 308)
-                        .addComponent(cPartesC, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(329, 329, 329)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(345, 345, 345)
+                        .addContainerGap()
+                        .addComponent(volver)
+                        .addGap(199, 199, 199)
+                        .addComponent(bcomprar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(364, 364, 364)
+                        .addComponent(jLabel2))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(330, 330, 330)
+                        .addComponent(cUnidades1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(355, 355, 355)
+                        .addComponent(jLabel3))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(314, 314, 314)
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4))))
+                            .addComponent(cPartesC, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bCarro))))
                 .addGap(144, 301, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(cPartesC, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cUnidades1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(34, 34, 34)
                 .addComponent(bCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel5)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tDir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bcomprar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(volver)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,30 +210,83 @@ public class MenuClientes extends javax.swing.JFrame {
     private void tDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tDirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tDirActionPerformed
-
+    
+    public static int unidadesT = 0;
+    public static float precioT = 0;
 
     private void bCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCarroActionPerformed
-
+        
         String parte = (String) cPartesC.getSelectedItem();
         int unidades = Integer.valueOf((String) cUnidades1.getSelectedItem());
+        
+        unidadesT += unidades;
+        
+        switch (parte) {
+            
+            case "liquidoFrenos":
+                precioT += (5.75f * unidades);
+                break;
+            case "cinturones":
+                precioT += (4f * unidades);
+                break;
+            case "llantas":
+                precioT += (15f * unidades);
+                break;
+            case "neumaticos":
+                precioT += (17.5f * unidades);
+                break;
+            case "radios":
+                precioT += (23f * unidades);
+                break;
+            case "altavoces":
+                precioT += (30f * unidades);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "error");
+            
+        }
 
         //SOLO CPMPRUEBA SI LAS UNIDADES SON VÁLIDAS O NO
         boolean validez = Consultas.comprobarParte(parte, unidades);
-
+        
         if (validez == true) {
             JOptionPane.showMessageDialog(null, "AÑADIDO AL CARRO");
             Consultas obj = new Consultas();
             //ACTUALIZAMOS LA BASE DE DATOS
             obj.updateTablapCoches(parte, unidades);
-
+            
         } else {
-
+            
             JOptionPane.showMessageDialog(null, "DEMASIADAS UNIDADES O NO QUEDAN");
             //no hace nada en la bd
         }
 
-
     }//GEN-LAST:event_bCarroActionPerformed
+
+    private void tNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tNombreActionPerformed
+
+    private void bcomprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcomprarActionPerformed
+
+        //borrar valores cuando los añada
+        InsertarDatosIniciales obj = new InsertarDatosIniciales();
+        
+        obj.insertClientesF(tNombre.getText(), tDir.getText(), tNum.getText(), unidadesT, precioT);
+        
+        unidadesT = 0;
+        precioT = 0;
+        
+
+    }//GEN-LAST:event_bcomprarActionPerformed
+
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        
+        this.setVisible(false);
+        MenuGUI obj = new MenuGUI();
+        obj.setVisible(true);
+       
+    }//GEN-LAST:event_volverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,18 +326,20 @@ public class MenuClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCarro;
+    private javax.swing.JButton bcomprar;
     private javax.swing.JComboBox<String> cPartesC;
     private javax.swing.JComboBox<String> cUnidades1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panel2;
     private javax.swing.JTextField tDir;
+    private javax.swing.JTextField tNombre;
     private javax.swing.JTextField tNum;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,15 +1,19 @@
 package BD;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Consultas {
 
     public static boolean comprobarParte(String nombre, int unidades) {
 
-        boolean validez = true;
+        boolean validez = false;
 
-        String url = "jdbc:sqlite:C:\\Users\\luis-\\Desktop\\1º DAM\\Netbeans Projects\\SUBIR_Y_BORRAR\\BD.db";
+        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTOEV3/BD.db";
+
         Connection conne = null;
         try {
             conne = DriverManager.getConnection(url);
@@ -17,14 +21,18 @@ public class Consultas {
             System.out.println(e.getMessage());
         }
 
-        String sqlT1 = "SELECT unidades FROM pCoches WHERE nombre =" + nombre;
+        String sqlT1 = "SELECT unidades FROM pCoches WHERE nombre = ?";
 
         try (Connection conn = conne;
-                Statement pstmt = conn.createStatement()) {
+                PreparedStatement pstmt = conn.prepareStatement(sqlT1)) {
 
-            ResultSet rs1 = pstmt.executeQuery(sqlT1);
+            pstmt.setString(1, nombre);
 
-            if (((Integer)rs1.getInt("unidades") == unidades) || ((Integer)rs1.getInt("unidades") < unidades)) {
+            ResultSet rs1 = pstmt.executeQuery();
+
+            int unidadesBD = rs1.getInt("unidades");
+
+            if ((unidadesBD == unidades) || (unidadesBD > unidades)) {
 
                 validez = true;
 
@@ -54,7 +62,7 @@ public class Consultas {
      */
     private Connection connect() {
 
-        String url = "jdbc:sqlite:C:\\Users\\luis-\\Desktop\\1º DAM\\Netbeans Projects\\SUBIR_Y_BORRAR\\BD.db";
+        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTOEV3/BD.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -66,23 +74,25 @@ public class Consultas {
 
     public void updateTablapCoches(String nombre, int unidades) {
 
-        String sql = "UPDATE pCoches SET unidades = ?  "
-                + "WHERE nombre = ?";
+        String sql = "SELECT unidades FROM pCoches WHERE nombre = ?";
 
-        String sql2 = "SELECT unidades FROM pCoches WHERE nombre = ?";
+        String sql2 = "UPDATE pCoches SET unidades = ?  "
+                + "WHERE nombre = ?";
 
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql);
-                PreparedStatement pstmt2 = conn.prepareStatement(sql);) {
+                PreparedStatement pstmt2 = conn.prepareStatement(sql2);) {
 
-            pstmt2.setString(1, nombre);
+            pstmt.setString(1, nombre);
 
-            ResultSet r1 = pstmt2.executeQuery();
+            ResultSet r1 = pstmt.executeQuery();
 
-            pstmt.setInt(1, unidades);
-            pstmt.setString(2, nombre);
+            int unidadesBD = r1.getInt("unidades");
 
-            pstmt.executeUpdate();
+            pstmt2.setInt(1, unidadesBD - unidades);
+            pstmt2.setString(2, nombre);
+
+            pstmt2.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Datos modificados");
 
@@ -91,6 +101,50 @@ public class Consultas {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "ERROR, asegúrate de que has insertado los datos correctamente");
         }
+    }
+
+    public static ArrayList<Object[]> selectAll() {
+
+        ArrayList<Object[]> datosArrayList = new ArrayList<>();
+        String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTOEV3/BD.db";
+
+        Connection conne = null;
+        try {
+            conne = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        String sqlT1 = "SELECT nombre,direccion,telf,numProductos,precioT FROM clientesF";
+
+        try (Connection conn = conne;
+                Statement stmt = conn.createStatement();
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs1 = stmt.executeQuery(sqlT1);) {
+
+            while (rs1.next()) {
+
+                Object[] arrayDatos = new Object[5];
+                arrayDatos[0] = rs1.getString("nombre");
+                arrayDatos[1] = rs1.getString("direccion");
+                arrayDatos[2] = rs1.getString("telf");
+                arrayDatos[3] = rs1.getInt("numProductos");
+                arrayDatos[4] = rs1.getFloat("precioT");
+                datosArrayList.add(arrayDatos);
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                conne.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        //DEVOLVEMOS EL ARRAYLIST CON TODAS LAS FILAS DE LA TABLA
+        return datosArrayList;
     }
 
 }

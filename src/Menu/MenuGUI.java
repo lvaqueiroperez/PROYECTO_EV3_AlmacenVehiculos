@@ -5,6 +5,8 @@
  */
 package Menu;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author luis-
@@ -30,8 +32,11 @@ public class MenuGUI extends javax.swing.JFrame {
         panel1 = new javax.swing.JPanel();
         bClientes = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        panel1.setBackground(new java.awt.Color(0, 153, 153));
 
         bClientes.setText("COMPRAR");
         bClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -47,6 +52,13 @@ public class MenuGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Modo Admin");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -56,16 +68,22 @@ public class MenuGUI extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(96, 96, 96)
                 .addComponent(bClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addGap(62, 62, 62)
                 .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -96,6 +114,27 @@ public class MenuGUI extends javax.swing.JFrame {
         obj2.setVisible(true);
 
     }//GEN-LAST:event_bClientesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        String pass = JOptionPane.showInputDialog(null, "Password:");
+        String p = "123";
+
+        if (pass.equalsIgnoreCase(p) == true) {
+
+            //admins
+            this.setVisible(false);
+            AdminData obj = new AdminData();
+
+            obj.setVisible(true);
+        } else {
+
+            JOptionPane.showMessageDialog(null, "CONTRASEÑA INCORRECTA");
+
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,6 +174,7 @@ public class MenuGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bClientes;
     private javax.swing.JButton bSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel panel1;
     // End of variables declaration//GEN-END:variables
 }

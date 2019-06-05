@@ -1,8 +1,5 @@
 package BD;
 
-//CLASE SOLO PARA CREAR UNA VEZ LA BD, LUEGO NO SE USA
-//HACER QUE SE CONECTE DIRECTAMENTE
-//HABRÁ VARIAS TABLAS
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -13,7 +10,7 @@ public class CreaBD {
 
     public static void createNewDatabase() {
 
-        String url = "jdbc:sqlite:C:\\Users\\luis-\\Desktop\\1º DAM\\Netbeans Projects\\SUBIR_Y_BORRAR\\BD.db";
+         String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/lvaqueiroperez/CLASE/NetBeansProjects/Boletines_Progra/PROYECTOEV3/BD.db";
         try (Connection conn = DriverManager.getConnection(url)) {
 
             if (conn != null) {
